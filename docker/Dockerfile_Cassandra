@@ -1,0 +1,12 @@
+# Use the official Cassandra image from Docker Hub
+FROM cassandra:latest
+
+# Expose the default Cassandra port
+EXPOSE 9042
+
+# Copy your custom Cassandra configuration (optional)
+# COPY cassandra.yaml /etc/cassandra/
+
+# Health check to ensure the container is ready to accept connections
+HEALTHCHECK --interval=10s --timeout=5s \
+  CMD cqlsh -e 'DESCRIBE KEYSPACES;' || exit 1

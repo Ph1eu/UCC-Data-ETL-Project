@@ -1,0 +1,14 @@
+# Use the official PostgreSQL image from Docker Hub
+FROM postgres:latest
+
+# Expose the default PostgreSQL port
+EXPOSE 5432
+
+# Environment variables for PostgreSQL
+ENV POSTGRES_DB=mydatabase
+ENV POSTGRES_USER=myuser
+ENV POSTGRES_PASSWORD=mypassword
+
+# Health check to ensure the container is ready to accept connections
+HEALTHCHECK --interval=10s --timeout=5s \
+  CMD pg_isready -U $POSTGRES_USER || exit 1
